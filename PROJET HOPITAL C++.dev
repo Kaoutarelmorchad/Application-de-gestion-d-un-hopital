@@ -1,62 +1,105 @@
-[Project]
-FileName=PROJET HOPITAL C++.dev
-Name=PROJET HOPITAL
-Type=1
-Ver=2
-ObjFiles=
-Includes=
-Libs=
-PrivateResource=
-ResourceIncludes=
-MakeIncludes=
-Compiler=
-CppCompiler=
-Linker=
-IsCpp=1
-Icon=
-ExeOutput=
-ObjectOutput=
-LogOutput=
-LogOutputEnabled=0
-OverrideOutput=0
-OverrideOutputName=
-HostApplication=
-UseCustomMakefile=0
-CustomMakefile=
-CommandLine=
-Folders=
-IncludeVersionInfo=0
-SupportXPThemes=0
-CompilerSet=0
-CompilerSettings=0000000000000000000000000
-UnitCount=1
+#include <iostream>
+#include <string>
+#include <vector>
 
-[VersionInfo]
-Major=1
-Minor=0
-Release=0
-Build=0
-LanguageID=1033
-CharsetID=1252
-CompanyName=
-FileVersion=
-FileDescription=Developed using the Dev-C++ IDE
-InternalName=
-LegalCopyright=
-LegalTrademarks=
-OriginalFilename=
-ProductName=
-ProductVersion=
-AutoIncBuildNr=0
-SyncProduct=1
+using namespace std;
 
-[Unit1]
-FileName=koukou.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+class Patient {
+public:
+    Patient(string name, int age, string gender) : name(name), age(age), gender(gender) {}
+
+    void print() {
+        cout << "Name: " << name << ", Age: " << age << ", Gender: " << gender << endl;
+    }
+    string get_name() const {
+        return name;
+    }
+
+private:
+    string name;
+    int age;
+    string gender;
+};
+
+class Doctor {
+public:
+    Doctor(string name, string specialty) : name(name), specialty(specialty) {}
+
+    void print() {
+        cout << "Name: " << name << ", Specialty: " << specialty << endl;
+    }
+ string get_name() const {
+        return name;
+    }
+private:
+    string name;
+    string specialty;
+};
+
+class HospitalRoom {
+public:
+    HospitalRoom(string name, int capacity) : name(name), capacity(capacity) {}
+
+    void print() {
+        cout << "Name: " << name << ", Capacity: " << capacity << endl;
+    }
+  string get_name() const {
+        return name;
+    }
+private:
+    string name;
+    int capacity;
+};
+class Appointment {
+public:
+    Appointment(Patient patient, Doctor doctor, HospitalRoom room, string date_time) : patient(patient), doctor(doctor), room(room), date_time(date_time) {}
+
+    void print() {
+        cout << "Patient: " << patient.get_name() << ", Doctor: " << doctor.get_name() << ", Room: " << room.get_name() << ", Date & Time: " << date_time << endl;
+    }
+
+private:
+    Patient patient;
+    Doctor doctor;
+    HospitalRoom room;
+    string date_time;
+};
+    
+    
+int main() {
+    vector<Patient> patients;
+    vector<Doctor> doctors;
+    vector<HospitalRoom> rooms;
+    vector<Appointment> appointments;
+   
+  // Création de patients
+    Patient patient1("El Morchad Kaoutar",26, "F");
+    Patient patient2("Boucif Oumaima",27, "F");
+    patients.push_back(patient1);
+    patients.push_back(patient2);
+
+    // Création de médecins
+    Doctor doctor1("Dr. Saad", "Cardiologie");
+    Doctor doctor2("Dr. Mouad", "Ophtalmologie");
+    doctors.push_back(doctor1);
+    doctors.push_back(doctor2);
+
+    // Création de salles d'hôpital
+    HospitalRoom room1("Chambre 1", 2);
+    HospitalRoom room2("Chambre 2", 1);
+    rooms.push_back(room1);
+    rooms.push_back(room2);
+    
+    // prendre un rendez-vous
+    Appointment appointment1(patient1, doctor1, room1, "2023-05-15 10:00");
+    Appointment appointment2(patient2, doctor2, room2, "2023-05-20 14:30");
+    appointments.push_back(appointment1);
+    appointments.push_back(appointment2);
+
+    // Affichage des rendez-vous
+    for (int i = 0; i < appointments.size(); i++) {
+        appointments[i].print();
+    }
+    return 0;
+}
 
